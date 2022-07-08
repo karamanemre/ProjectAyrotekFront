@@ -1,0 +1,29 @@
+.homepage {
+  background-image: url("https://www.ayrotek.com.tr/r/w-1920_h-1080/slider/shutterstock-1067053463.jpg");
+  background-color: #cccccc;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .center-content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    .title {
+      font-size: 70px;
+      color: rgb(175, 214, 231);
+      text-shadow: 1px 1px black;
+      font-weight: 800;
+    }
+    .sub-title{
+        color: white;
+        font-size: 40px;
+        letter-spacing: 0.5ch;
+        margin-top: 6rem;
+    }
+  }
+}
