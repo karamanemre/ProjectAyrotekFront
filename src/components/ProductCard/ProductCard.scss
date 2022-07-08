@@ -1,0 +1,23 @@
+.product-card{
+    height: auto;
+    width: 500px;
+    background-color: aliceblue;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    .cart-detail{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        color: rgb(135, 135, 135);
+        span{
+            &:hover{
+                color: black;
+                transition: 0.4s;
+                cursor: pointer;
+            }
+        }
+    }
+}
