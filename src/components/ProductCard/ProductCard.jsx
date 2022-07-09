@@ -2,27 +2,27 @@ import React from "react";
 import { useUserContext } from "../../context/UserContext";
 import "./ProductCard.scss";
 
-function ProductCard() {
+function ProductCard({item}) {
 
     const {isLogin,currentUser} = useUserContext();
 
   return (
     <div className="product-card">
       <div>
-        <b>Product Name:</b> Iphone 13
+        <b>Product Name:</b> {item.name}
       </div>
       <div>
         {" "}
-        <b>Product Description:</b> 128gb hafıza
+        <b>Product Description:</b> {item.description}
       </div>
       <div>
-        <b>Product Price:</b> 10485$
+        <b>Product Price:</b> {item.price}
       </div>
       <div>
         {" "}
         <b>Seller:</b> Emre Karaman
       </div>
-      {isLogin && currentUser.id === "1" && <div className={"cart-detail"}>
+      {isLogin && currentUser.id === item.sellerId && <div className={"cart-detail"}>
         <span>Sil</span>
         <span>Güncelle</span>
       </div>}
