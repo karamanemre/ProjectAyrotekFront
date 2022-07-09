@@ -3,15 +3,23 @@ import { useFormik, Form, Formik } from "formik";
 import * as Yup from "yup";
 import Input from "../../components/Input";
 import "./login.scss";
+import UserService from '../../services/userServices.js'
+import { toast } from "react-toastify";
+import { Navigate, Redirect, useNavigate } from 'react-router-dom';
+import {useUserContext} from "../../context/UserContext"
 
 function Login() {
+
+  const navigate = useNavigate();
+  const {setIsLogin,setCurrentUser} = useUserContext();
+
   let initialValues = {
-    username: "",
+    email: "",
     password: "",
   };
 
   const validationSchema = Yup.object({
-    username: Yup.string().required("Zorunlu alan"),
+    email: Yup.string().required("Zorunlu alan"),
     password: Yup.string().required("Zorunlu alan"),
   });
 
@@ -19,7 +27,15 @@ function Login() {
     initialValues,
     validationSchema,
     onSubmit: (values) => {
-      alert("sad");
+      const userService = new UserService()
+      userService.login(values).then(res=>{
+        toast.success("Giriş başarılı")
+        setCurrentUser(res.data.data)
+        setIsLogin(true)
+        navigate("/")
+      }).catch(err=>{
+        toast.error("Giriş başarısız")
+      })
     },
   });
 
@@ -30,10 +46,10 @@ function Login() {
           <div className="mb-3">
             <Input
               label={"Username"}
-              error={errors.username}
+              error={errors.email}
               inputType="text"
-              name={"username"}
-              value={values.username}
+              name={"email"}
+              value={values.email}
               handleChange={handleChange}
             />
           </div>

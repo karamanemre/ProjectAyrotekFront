@@ -20,4 +20,6 @@ export default class ProductService {
   getAll() {
     return axios.get("api/productws/getAll");
   }
+
+  
 }

@@ -4,11 +4,12 @@ const UserContext = createContext();
 
 export function UserProvider({ children }) {
 
-    const [isLogin,setIsLogin] = useState(true);
-    const [currentUser,setCurrentUser] = useState({id:"1"});
+    const [isLogin,setIsLogin] = useState(false);
+    const [currentUserName,setCurrentUserName] = useState(false);
+    const [currentUser,setCurrentUser] = useState({id:"",token:"",fullname:""});
 
   const values = {
-    isLogin,setIsLogin,currentUser,setCurrentUser
+    isLogin,setIsLogin,currentUser,setCurrentUser,currentUserName,setCurrentUserName
   };
 
   return (

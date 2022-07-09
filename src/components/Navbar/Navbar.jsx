@@ -1,10 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useUserContext } from "../../context/UserContext";
 import SignedIn from "../SignedIn";
 import SignedOut from "../SignedOut";
 import "./navbar.scss";
 
 function Navbar() {
+
+  const {isLogin} = useUserContext();
+
+  console.log(isLogin);
+
   return (
     <div className="navbar">
       <div className="container">
@@ -12,7 +18,7 @@ function Navbar() {
           {" "}
           <img src="./logo.png" />
         </Link>
-      {true ?  <SignedOut/> : <SignedIn/>}
+      {!isLogin ?  <SignedOut/> : <SignedIn/>}
       </div>
     </div>
   );
