@@ -12,9 +12,7 @@ function Input({label,name,handleChange,value,inputType,error,placeHolder}) {
         className={"form-control"}
         placeholder={label}
       />
-      <small className="form-text error invalid-feedback text-danger">
-        {error && error}
-      </small>
+      {error && <div className='text-danger'>{error}</div>}
     </div>
   )
 }

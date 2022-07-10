@@ -32,6 +32,7 @@ function Login() {
         toast.success("Giriş başarılı")
         setCurrentUser(res.data.data)
         setIsLogin(true)
+        userService.setAxiosHeader(res.data.data.token)
         navigate("/")
       }).catch(err=>{
         toast.error("Giriş başarısız")
@@ -43,9 +44,10 @@ function Login() {
     <div className="login-page">
       <form onSubmit={handleSubmit}>
         <div className="content">
+        <div className="login-title">Login</div>
           <div className="mb-3">
             <Input
-              label={"Username"}
+              label={"Email"}
               error={errors.email}
               inputType="text"
               name={"email"}

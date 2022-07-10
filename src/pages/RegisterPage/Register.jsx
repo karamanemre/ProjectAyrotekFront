@@ -1,18 +1,29 @@
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import Input from "../../components/Input";
 import * as Yup from "yup";
 import './register.scss'
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
+import UserService from "../../services/userServices";
+import { useUserContext } from "../../context/UserContext";
+import Spinner from '../../components/Spinner'
 
 function Register() {
+
+  const [emailUniqe,setEmaiilUniqe] = useState("");
+  const {isLoading,setIsLoading} = useUserContext();
+
+  const navigate = useNavigate();
+
   let initialValues = {
-    username: "",
+    email: "",
     password: "",
     fullname:""
   };
 
   const validationSchema = Yup.object({
-    username: Yup.string().required("Zorunlu alan"),
+    email: Yup.string().required("Zorunlu alan").email("Lütfen doğru bir email giriniz"),
     password: Yup.string().required("Zorunlu alan"),
     fullname: Yup.string().required("Zorunlu alan"),
   });
@@ -21,21 +32,35 @@ function Register() {
     initialValues,
     validationSchema,
     onSubmit: (values) => {
-      alert("register")
+      const userService = new UserService()
+      setIsLoading(true)
+      userService.register(values).then(res=>{
+        if(res.status === 409){return setEmaiilUniqe("email alanı uniqe olmalı")}
+        toast.success("Kayıt başarılı")
+        navigate("/login")
+      }).catch(err=>{
+        console.log(err);
+        if(err.response.status === 409){return setEmaiilUniqe(err.response.data.message)}
+        toast.error("Kayıt başarısız")
+      })
+      setIsLoading(false)
     },
   });
+
+  const isDisabled = errors.email || errors.fullname || errors.password || emailUniqe
 
   return (
     <div className="register-page">
       <form onSubmit={handleSubmit}>
         <div className="content">
+        <div className="register-title">Register</div>
           <div className="mb-3">
             <Input
-              label={"Username"}
-              error={errors.username}
+              label={"Email"}
+              error={errors.email || emailUniqe}
               inputType="text"
-              name={"username"}
-              value={values.username}
+              name={"email"}
+              value={values.email}
               handleChange={handleChange}
             />
           </div>
@@ -60,7 +85,7 @@ function Register() {
             />
           </div>
           <div className="d-flex justify-content-center">
-            <button className="btn btn-outline-primary w-100" type="submit" disabled={errors.password || errors.username}>
+            <button className="btn btn-outline-primary w-100" type="submit" disabled={isDisabled}>
               Register
             </button>
           </div>
