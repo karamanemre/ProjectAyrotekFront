@@ -1,10 +1,17 @@
 import React from "react";
+import { toast } from "react-toastify";
 import { useUserContext } from "../../context/UserContext";
+import ProductService from "../../services/prouctService";
 import "./ProductCard.scss";
 
 function ProductCard({item}) {
 
     const {isLogin,currentUser} = useUserContext();
+    
+    const deleteProduct = (id) => {
+      const productService = new ProductService();
+      productService.delete(id).then(res=>toast.success("Başarılı")).catch(err=>toast.error("Başarısız"));
+    }
 
   return (
     <div className="product-card">
@@ -22,8 +29,8 @@ function ProductCard({item}) {
         {" "}
         <b>Seller:</b> Emre Karaman
       </div>
-      {isLogin && currentUser.id === item.sellerId && <div className={"cart-detail"}>
-        <span>Sil</span>
+      {isLogin && currentUser.userId === item.sellerId && <div className={"cart-detail"}>
+        <span onClick={()=>deleteProduct(item.id)}>Sil</span>
         <span>Güncelle</span>
       </div>}
       

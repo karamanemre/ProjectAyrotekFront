@@ -14,8 +14,8 @@ function Login() {
   const {setIsLogin,setCurrentUser} = useUserContext();
 
   let initialValues = {
-    email: "",
-    password: "",
+    email: "7emre10@gmail.com",
+    password: "1",
   };
 
   const validationSchema = Yup.object({
@@ -35,7 +35,7 @@ function Login() {
         userService.setAxiosHeader(res.data.data.token)
         navigate("/")
       }).catch(err=>{
-        toast.error("Giriş başarısız")
+        toast.error("Kullanıcı adı veya şifre hatalı")
       })
     },
   });

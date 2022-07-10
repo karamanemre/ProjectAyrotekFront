@@ -13,7 +13,7 @@ function Products() {
     productService.getAll().then(res =>{
       setProducts(res.data.data)
     });
-  },[])
+  },[products])
 
   return (
     <div className='products-page container'>
