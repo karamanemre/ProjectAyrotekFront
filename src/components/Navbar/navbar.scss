@@ -1,21 +1,29 @@
-.navbar{
-    .menu-items{
-        display: flex;
-        justify-content: space-between;
-        flex-direction: row;
-        gap: 20px;
-        font-size: 20px;
-        .item{
-            font-weight: 500;
-            .link-properties{
-                text-decoration: none !important;
-                color: black;
-                &:hover{
-                    color: rgb(44, 156, 150);
-                    transition: 0.5s;
-                    cursor: pointer;
-                }
-            }
-        }
+.navbar {
+  .menu-items {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    gap: 20px;
+    font-size: 20px;
+    .item {
+      font-weight: 500;
     }
+  }
+  .link-properties {
+    text-decoration: none !important;
+    color: black;
+    &:hover {
+      color: rgb(44, 156, 150);
+      transition: 0.5s;
+      cursor: pointer;
+    }
+  }
+  .log-out{
+    color: rgb(134, 134, 134);
+    &:hover{
+        color: black;
+        transition: 0.5s;
+        cursor: pointer;
+    }
+  }
 }

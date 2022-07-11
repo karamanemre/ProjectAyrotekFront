@@ -42,6 +42,7 @@ function ProductAdd() {
 
   return (
     <div className="product-add">
+    <div className="content-modal">
       <form onSubmit={handleSubmit} className="form">
         <div className="content">
           <div className="product-title">Product Add</div>
@@ -86,6 +87,7 @@ function ProductAdd() {
           </div>
         </div>
       </form>
+      </div>
     </div>
   );
 }

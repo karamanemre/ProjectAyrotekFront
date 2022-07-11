@@ -17,9 +17,9 @@ function Register() {
   const navigate = useNavigate();
 
   let initialValues = {
-    email: "",
-    password: "",
-    fullname:""
+    email: "7emre10@gmail.com",
+    password: "1",
+    fullname:"Emre Karaman"
   };
 
   const validationSchema = Yup.object({

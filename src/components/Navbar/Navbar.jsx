@@ -9,8 +9,6 @@ function Navbar() {
 
   const {isLogin} = useUserContext();
 
-  console.log(isLogin);
-
   return (
     <div className="navbar">
       <div className="container">

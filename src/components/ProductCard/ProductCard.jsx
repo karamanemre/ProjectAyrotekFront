@@ -2,6 +2,7 @@ import React from "react";
 import { toast } from "react-toastify";
 import { useUserContext } from "../../context/UserContext";
 import ProductService from "../../services/prouctService";
+import UpdateProductModalButton from "../ModalButton/UpdateProductModalButton";
 import "./ProductCard.scss";
 
 function ProductCard({item}) {
@@ -31,7 +32,7 @@ function ProductCard({item}) {
       </div>
       {isLogin && currentUser.userId === item.sellerId && <div className={"cart-detail"}>
         <span onClick={()=>deleteProduct(item.id)}>Sil</span>
-        <span>Güncelle</span>
+        <span><UpdateProductModalButton product={item} text={"Güncelle"} /></span>
       </div>}
       
     </div>
