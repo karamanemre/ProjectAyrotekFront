@@ -2,14 +2,14 @@ import axios from "axios";
 
 export default class UserService {
 
-  // BASE_URL = "http://localhost:5555";
+  BASE_URL = "http://localhost:5555";
   
   login(body) {
-    return axios.post("api/userws/login", body);
+    return axios.post(`${this.BASE_URL}/api/userws/login`, body);
   }
 
   getById(id) {
-    return axios.get("api/userws/getById/"+id);
+    return axios.get(`${this.BASE_URL}/api/userws/getById/${id}`);
   }
 
   setAxiosHeader(token){
@@ -18,6 +18,6 @@ export default class UserService {
   }
 
   register(body){
-    return axios.post("api/userws/save", body);
+    return axios.post(`${this.BASE_URL}/api/userws/save`, body);
   }
 }

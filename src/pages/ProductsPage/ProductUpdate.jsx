@@ -10,7 +10,7 @@ import ProductService from "../../services/prouctService";
 
 function ProductUpdate() {
   const { id } = useParams();
-  const [product, setProduct] = useState([{}]);
+  const [product, setProduct] = useState([]);
   const { products } = useProductContext();
   const [spinner, setSpinner] = useState();
 
@@ -24,6 +24,7 @@ function ProductUpdate() {
   },[id]);
 
   let initialValues = {
+    id: product.id,
     name: product.name,
     description: product.description,
     price: product.price,
@@ -40,17 +41,20 @@ function ProductUpdate() {
     initialValues,
     validationSchema,
     onSubmit: (values) => {
+      console.log(values);
         setSpinner(true);
+        console.log(values);
         const productService = new ProductService();
         productService
           .update(values)
-          .then((res) => toast.success("Başarıyla eklendi"))
+          .then((res) => toast.success("Başarıyla güncellendi"))
           .catch((err) => toast.error("İşlem başarısız."));
         setSpinner(false);
     },
   });
 
   const changeValue = value => {
+    values.id = value.id
     values.description=value.description
     values.name=value.name
     values.sellerId=value.sellerId
