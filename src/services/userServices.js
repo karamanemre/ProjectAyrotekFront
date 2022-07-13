@@ -1,6 +1,9 @@
 import axios from "axios";
 
 export default class UserService {
+
+  // BASE_URL = "http://localhost:5555";
+  
   login(body) {
     return axios.post("api/userws/login", body);
   }

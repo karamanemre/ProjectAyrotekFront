@@ -6,7 +6,6 @@ export function ProductProvider({ children }) {
 
     const [products,setProducts] = useState([]);
 
-
   const values = {
     products,setProducts
   };

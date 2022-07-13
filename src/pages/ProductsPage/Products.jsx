@@ -21,8 +21,10 @@ function Products() {
           <img src="./not-found.jpg"></img>
         </div>
       )}
-      {products.map((item) => (
-        <ProductCard key={item.id} item={item} />
+      {products.map((item,key) => (
+        <div>
+          <ProductCard key={key} item={item} />
+        </div>
       ))}
     </div>
   );

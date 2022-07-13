@@ -1,6 +1,9 @@
 import axios from "axios";
 
 export default class ProductService {
+
+  // BASE_URL = http://localhost:5555/
+
   save(product) {
     return axios.post("api/productws/save", product);
   }
@@ -14,7 +17,7 @@ export default class ProductService {
   }
 
   getById(id) {
-    return axios.get("api/productws/getById"+id);
+    return axios.get("api/productws/getById/"+id);
   }
 
   getAll() {

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Input({label,name,handleChange,value,inputType,error,placeHolder}) {
+function Input({label,name,handleChange,value,inputType,error,defaultValue}) {
   return (
     <div className="form-group mb-3 d-flex flex-column margin-bottom-2">
       <label className='mb-2'>{label}</label>
@@ -11,6 +11,7 @@ function Input({label,name,handleChange,value,inputType,error,placeHolder}) {
         type={inputType}
         className={"form-control"}
         placeholder={label}
+        defaultValue={defaultValue}
       />
       {error && <div className='text-danger'>{error}</div>}
     </div>

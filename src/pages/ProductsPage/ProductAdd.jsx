@@ -21,7 +21,7 @@ function ProductAdd() {
   const validationSchema = Yup.object({
     name: Yup.string().required("Zorunlu alan"),
     description: Yup.string().required("Zorunlu alan"),
-    price: Yup.string().required("Zorunlu alan"),
+    price: Yup.number().required("Zorunlu alan"),
   });
 
   const { handleSubmit, handleChange, values, errors, resetForm } = useFormik({

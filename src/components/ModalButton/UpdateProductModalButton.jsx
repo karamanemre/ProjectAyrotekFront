@@ -8,14 +8,14 @@ import { toast } from "react-toastify";
 import { useUserContext } from "../../context/UserContext";
 import { useProductContext } from "../../context/ProductContext";
 
-function ModalButton({ product,text }) {
+function ModalButton({ text }) {
   const [spinner, setSpinner] = useState();
 
   let initialValues = {
-    name: product.name,
-    description: product.description,
-    price: product.price,
-    sellerId: product.sellerId,
+    name: "",
+    description: "",
+    price: "",
+    sellerId: "",
   };
 
   const validationSchema = Yup.object({
@@ -37,21 +37,12 @@ function ModalButton({ product,text }) {
       setSpinner(false);
     },
   });
-
-  const changedInitialValues = (val) => {
-    values.name = val.name;
-    values.description = val.description;
-    values.price = val.price;
-    values.sellerId = val.sellerId;
-  };
-
+  
   return (
     <div id="modal-button-container">
       <div className="container">
         <div className="interior">
-          <a href="#open-modal" onClick={() => changedInitialValues(product)}>
-            {"Edit Product"}
-          </a>
+          <a href="#open-modal">{"Edit Product"}</a>
         </div>
       </div>
       <div id="open-modal" className="modal-window">
@@ -64,50 +55,47 @@ function ModalButton({ product,text }) {
             <h2 className="mb-5 mt-3"> {"Edit Product"}</h2>
 
             <div className="text-dark">
-              <form onSubmit={handleSubmit} className="form">
-                <div className="content">
-                  <div className="product-title">Product Add</div>
-                  <div className="mb-3 product-div">
-                    <Input
-                      label={"Product Name"}
-                      error={errors.name}
-                      inputType="text"
-                      name={"name"}
-                      value={values.name}
-                      handleChange={handleChange}
-                    />
-                  </div>
-                  <div>
-                    <Input
-                      label={"Product Description"}
-                      error={errors.description}
-                      inputType="text"
-                      name={"description"}
-                      value={values.description}
-                      handleChange={handleChange}
-                    />
-                  </div>
-                  <div>
-                    <Input
-                      label={"Product Price"}
-                      error={errors.price}
-                      inputType="text"
-                      name={"price"}
-                      value={values.price}
-                      handleChange={handleChange}
-                    />
-                  </div>
-                  <div className="d-flex justify-content-center">
-                    <button
-                      className="btn btn-outline-primary w-100"
-                      type="submit"
-                      disabled={spinner}
-                    >
-                      Add Product
-                    </button>
-                  </div>
+              <div className="content">
+                <div className="mb-3 product-div">
+                  <Input
+                    label={"Product Name"}
+                    error={errors.name}
+                    inputType="text"
+                    name={"name"}
+                    value={values.name}
+                    handleChange={handleChange}
+                  />
                 </div>
-              </form>
+                <div>
+                  <Input
+                    label={"Product Description"}
+                    error={errors.description}
+                    inputType="text"
+                    name={"description"}
+                    value={values.description}
+                    handleChange={handleChange}
+                  />
+                </div>
+                <div>
+                  <Input
+                    label={"Product Price"}
+                    error={errors.price}
+                    inputType="text"
+                    name={"price"}
+                    value={values.price}
+                    handleChange={handleChange}
+                  />
+                </div>
+                <div className="d-flex justify-content-center">
+                  <button
+                    className="btn btn-outline-primary w-100"
+                    type="submit"
+                    disabled={spinner}
+                  >
+                    Update Product
+                  </button>
+                </div>
+              </div>
             </div>
           </form>
         </div>
