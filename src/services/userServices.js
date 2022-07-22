@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default class UserService {
 
-  BASE_URL = "http://localhost:5555";
+  BASE_URL = "http://localhost:8085";
   
   login(body) {
     return axios.post(`${this.BASE_URL}/api/userws/login`, body);
@@ -13,8 +13,11 @@ export default class UserService {
   }
 
   setAxiosHeader(token){
-    let signature = `Bearer ${token})}`
-    axios.defaults.headers['Authorization'] = signature
+    const signature = `Bearer ${token})}`
+    axios.interceptors.request.use((config) => {
+      config.headers.authorization = signature;
+      return config;
+    });
   }
 
   register(body){

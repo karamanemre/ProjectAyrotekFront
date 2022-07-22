@@ -2,14 +2,15 @@ import axios from "axios";
 
 export default class ProductService {
 
-  BASE_URL = "http://localhost:5555";
+  BASE_URL = "http://localhost:8084";
   
   save(product) {
     return axios.post(`${this.BASE_URL}/api/productws/save`, product);
   }
 
   delete(id) {
-    return axios.post(`${this.BASE_URL}/productws/delete/${id}`);
+    console.log(axios.head)
+    return axios.delete(`${this.BASE_URL}/api/productws/deleteById/${id}`);
   }
 
   update(product) {

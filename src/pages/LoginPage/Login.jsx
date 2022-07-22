@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik, Form, Formik } from "formik";
 import * as Yup from "yup";
 import Input from "../../components/Input";
@@ -12,9 +12,10 @@ function Login() {
 
   const navigate = useNavigate();
   const {setIsLogin,setCurrentUser} = useUserContext();
+  const [spinner,setSpinner] = useState(false);
 
   let initialValues = {
-    email: "7emre10@gmail.com",
+    email: "deneme@gmail.com",
     password: "1",
   };
 
@@ -28,15 +29,18 @@ function Login() {
     validationSchema,
     onSubmit: (values) => {
       const userService = new UserService()
+      setSpinner(true)
       userService.login(values).then(res=>{
         toast.success("Giriş başarılı")
         setCurrentUser(res.data.data)
         setIsLogin(true)
-        userService.setAxiosHeader(res.data.data.token)
+        const token = res.data.data.token
+        userService.setAxiosHeader(token)
         navigate("/")
       }).catch(err=>{
         toast.error("Kullanıcı adı veya şifre hatalı")
       })
+      setSpinner(false)
     },
   });
 

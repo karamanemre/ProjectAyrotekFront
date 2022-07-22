@@ -10,12 +10,15 @@ import "./ProductCard.scss";
 function ProductCard({ item }) {
   const { isLogin, currentUser } = useUserContext();
   const navigate = useNavigate();
+  const {products,setProducts} = useProductContext();
 
   const deleteProduct = (id) => {
     const productService = new ProductService();
     productService
       .delete(id)
-      .then((res) => toast.success("Başarılı"))
+      .then((res) => {
+        setProducts(products.filter(f => f.id !== id))
+        toast.success("Başarılı")})
       .catch((err) => toast.error("Başarısız"));
   };
 
@@ -33,7 +36,7 @@ function ProductCard({ item }) {
       </div>
       <div>
         {" "}
-        <b>Seller:</b> Emre Karaman
+        <b>Seller:</b> {item.sellerName}
       </div>
       {isLogin && currentUser.userId === item.sellerId && (
         <div className={"cart-detail"}>

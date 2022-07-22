@@ -13,11 +13,12 @@ function Register() {
 
   const [emailUniqe,setEmaiilUniqe] = useState("");
   const {isLoading,setIsLoading} = useUserContext();
+  const [spinner,setSpinner] = useState(false);
 
   const navigate = useNavigate();
 
   let initialValues = {
-    email: "7emre10@gmail.com",
+    email: "deneme@gmail.com",
     password: "1",
     fullname:"Emre Karaman"
   };
@@ -32,22 +33,23 @@ function Register() {
     initialValues,
     validationSchema,
     onSubmit: (values) => {
+      setSpinner(true)
       const userService = new UserService()
-      setIsLoading(true)
       userService.register(values).then(res=>{
         if(res.status === 409){return setEmaiilUniqe("email alanı uniqe olmalı")}
         toast.success("Kayıt başarılı")
+        console.log("sdsd");
         navigate("/login")
       }).catch(err=>{
         console.log(err);
         if(err.response.status === 409){return setEmaiilUniqe(err.response.data.message)}
         toast.error("Kayıt başarısız")
       })
-      setIsLoading(false)
+      setSpinner(false)
     },
   });
 
-  const isDisabled = errors.email || errors.fullname || errors.password || emailUniqe
+  const isDisabled = errors.email || errors.fullname || errors.password || emailUniqe || spinner
 
   return (
     <div className="register-page">
@@ -86,7 +88,7 @@ function Register() {
           </div>
           <div className="d-flex justify-content-center">
             <button className="btn btn-outline-primary w-100" type="submit" disabled={isDisabled}>
-              Register
+             {spinner ? <Spinner/> : "Register"}
             </button>
           </div>
         </div>
